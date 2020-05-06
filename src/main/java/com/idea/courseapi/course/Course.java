@@ -1,21 +1,37 @@
 package com.idea.courseapi.course;
 
-import javax.persistence.Id;
+import com.idea.courseapi.topic.Topic;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Course {
 
     @Id
     private String id;
     private String name;
-    private String descripcion;
+    private String description;
+    @ManyToOne
+    private Topic topic;
 
     public Course() {
     }
 
-    public Course(String id, String name, String descripcion) {
+    public Course(String id, String name, String descripcion, String topicId) {
         this.id = id;
         this.name = name;
-        this.descripcion = descripcion;
+        this.description = descripcion;
+        this.topic = new Topic(topicId, "", "");
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     public String getId() {
@@ -34,11 +50,11 @@ public class Course {
         this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
